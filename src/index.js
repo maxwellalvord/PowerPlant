@@ -13,6 +13,7 @@ const storeState = () => {
 
 const stateControl = storeState();
 
+
 // This is a function factory. We can easily create more specific functions that alter a plant's soil, water, and light to varying degrees.
 
 const changeState = (prop) => {
@@ -24,6 +25,7 @@ const changeState = (prop) => {
   }
 }
 
+const plantNew = {...state, water: 5};
 // We create four functions using our function factory. We could easily create many more.
 const giveLight = changeState("light")(5);
 
@@ -62,7 +64,29 @@ $(document).ready(function () {
   $('#light').click(function () {
     const newState = stateControl(giveLight);
     $('#light-value').text(`Light: ${newState.light}`);
+    console.log(newState);
   });
 
+
+
+  $("#new-plant").click(function(){
+    var newPlant = {soil: 1, light: 3, water: -3}
+    const stateChangeFunction = storeState(newPlant);
+  });
+
+  $('#feed1').click(function () {
+    const newPlant = stateControl(blueFood);
+    $('#soil-value1').text(`Soil: ${newPlant.soil}`);
+  });
+
+  $('#water1').click(function () {
+    const newPlant = stateControl(superWater);
+    $('#water-value1').text(`Water: ${newPlant.water}`);
+  });
+
+  $('#light1').click(function () {
+    const newPlant = stateControl(giveLight);
+    $('#light-value1').text(`Light: ${newPlant.light}`);
+  });
 });
 
